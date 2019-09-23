@@ -1,56 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-jogador</ion-title>
+    <ion-title>Cadastro do mestre
+        <ion-icon name="flame"></ion-icon>
+    </ion-title>
+    
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-item>
-    <ion-label position="floating">Nome</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+<form #fc="ngForm" (ngSubmit) = "onsubmit(fc)">
+    <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="text" [(ngModel)] = "jogador.nome" name="nome" required ></ion-input>
+    </ion-item>
 
+    <ion-item>
+        <ion-label position="floating">Nick name</ion-label>
+        <ion-input type="text"  [(ngModel)] = "jogador.nickname" name="nickname" required></ion-input>
+    </ion-item>
 
+    <ion-item>
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input type="email"  [(ngModel)] = "jogador.email" name="email" required></ion-input>
+    </ion-item>
 
+    <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input type="password"  [(ngModel)] = "jogador.pws" name="pws" required minlength="6" #pws="ngModel" ></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="pws.invalid && pws.dirty">Senha curta</ion-text>
 
+    <ion-item>
+        <ion-label position="floating">Confirmar senha</ion-label>
+        <ion-input type="password"  (ngModel)="conf" name="conf" required #conf="ngModel"></ion-input>
+    </ion-item>
+        <ion-text color="danger" *ngIf="(pws.value != conf.value) && pws.dirty">Senha diferente</ion-text>
+    
 
-<ion-item>
-  <ion-label position="floating">NickName</ion-label>
-  <ion-input type="text"></ion-input>
-</ion-item>
-
-
-
-
-<ion-item>
-  <ion-label position="floating">E-mail</ion-label>
-  <ion-input type="email"></ion-input>
-</ion-item>
-
-
-
-
-
-
-<ion-item>
-  <ion-label position="floating">Senha</ion-label>
-  <ion-input type="password"></ion-input>
-</ion-item>
-
-
-
-
-
-<ion-item>
-  <ion-label position="floating">Confirmar senha</ion-label>
-  <ion-input type="password"></ion-input>
-</ion-item>
+    <ion-item lines="none">
+        <ion-button expand="full" type="submit" color="dark" [disabled]= "fc.invalid">Salvar</ion-button>
+        <!-- Verificar o "fc.invalid" se o F ta minusculo caso n esteja vai dar erro // e o "ngif" o I é maiusculo "ngIf"-->
+        <ion-button slot="end" type="reset" color="dark">cancelar</ion-button>
+    </ion-item> 
+</form>
+    
 
 </ion-content>
-
-<ion-item lines="none">
-  <ion-button expand="full" color="dark">Salvar</ion-button>
-  <ion-button slot="end" color="dark">cancelar</ion-button>
-
-</ion-item>

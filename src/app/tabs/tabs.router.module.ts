@@ -18,12 +18,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'listJogador',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../pages/list-Jogador/list-Jogador.module').then(m => m.ListJogadorPageModule)
           }
         ]
       },
@@ -43,15 +43,12 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () =>
-              import('../pages/add-jogador/add-jogador.module').then(m => m.AddJogadorPageModule)
-          //loadChildren: './pages/add-jogador/add-jogador.module#AddJogadorPageModule
-
-              
+            loadChildren: () => import('../pages/add-jogador/add-jogador.module').then(m => m.AddJogadorPageModule)
+              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
           }
         ]
       },
-      
+
       {
         path: '',
         redirectTo: '/tabs/tab1',
