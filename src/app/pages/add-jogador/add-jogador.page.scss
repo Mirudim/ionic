@@ -1,9 +1,15 @@
 ion-content{
 
-    --ion-background-color:rgb(9, 238, 39);
+    --ion-background-color:rgb(253, 15, 35);
 }
 
 ion-toolbar{
 
-    --ion-background-color:rgb(42, 156, 48);
+    --ion-background-color:rgb(16, 17, 17);
+}
+
+.foto img{
+    width: 70%;
+    border-radius: 165%;
+    margin: 70px auto;
 }

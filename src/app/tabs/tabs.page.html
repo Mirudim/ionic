@@ -2,18 +2,19 @@
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1">
-      <ion-icon name="home"></ion-icon>
+      <ion-icon name="home"><ion-badge slot="start">1</ion-badge></ion-icon>
       <ion-label>início</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="listJogador">
       <ion-icon name="logo-game-controller-b"></ion-icon>
-      <ion-label>jogador</ion-label>
+      
+      <ion-label>jogador</ion-label><ion-badge color="danger">66</ion-badge>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3">
-      <ion-icon name="send"></ion-icon>
-      <ion-label>Tab Three</ion-label>
+    <ion-tab-button tab="listGame">
+      <ion-icon name="logo-game-controller-a"></ion-icon>
+      <ion-label>Adicionar jogo</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore'
+import{AngularFirestoreModule} from '@angular/fire/firestore'
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,4 +28,4 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

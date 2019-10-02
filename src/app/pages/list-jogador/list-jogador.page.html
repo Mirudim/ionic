@@ -1,33 +1,44 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      JOGADOR
-      <ion-icon name="logo-ionitron"></ion-icon>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
+    <ion-toolbar>
+      <ion-title>
+        Players
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   
-  
-
   <ion-content>
-      <!-- fab placed to the (vertical) center and end -->
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button color="danger" routerLink="/tabs/addjogador">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="danger" routerLink="/tabs/addjogador">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-list *ngIf="jogadores">
+      <ion-item-sliding *ngFor="let j of jogadores">
+        <ion-item-options side="start">
+          <ion-item-option color="" (click)="editar(j)">
+            <ion-icon slot="icon-only" name="create"></ion-icon>Atualizar
+          </ion-item-option>
+        </ion-item-options>
+  
+        <ion-item routerLink="/tabs/perfilJogador/{{j.key}}">
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+          <ion-label>{{ j.nickname }}</ion-label>
+          <ion-text>{{ j.email }}</ion-text>
+        </ion-item>
+  
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="excluir(j)" expandable>
+            <ion-icon slot="icon-only" name="create"></ion-icon>Delete
 
-<ion-list *ngIf="jogadores | async as lp">
-  <ion-item *ngFor="let j of lp">
-    <ion-avatar slot="start">
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-    </ion-avatar>
-    <ion-label>{{j.nickname}}</ion-label>
-    <ion-text>{{j.email}}</ion-text>
-  </ion-item>
-</ion-list>
-
-    </ion-content>
-   </ion-content>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-content>
