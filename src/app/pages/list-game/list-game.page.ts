@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../../services/game.service'
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-list-game',
@@ -11,27 +11,27 @@ export class ListGamePage implements OnInit {
   protected games: any;
 
   constructor(
-    protected gameService:GameService
+    protected gameService: GameService
   ) { }
 
   ngOnInit() {
-    this.gameService.getAll().subscribe(
-    res=>{
-      this.games = res;
-    }
-  )
-}
+    this.gameService.gelAll().subscribe(
+      res => {
+        this.games = res;
+      }
+    )
+  }
 
-  doRefresh(event){
-      console.log('Begin async operation');
-      this.gameService.getAll().subscribe(
-       res=> {
-         this.games = res
+  async doRefresh(event) {
+    //console.log('Begin async operation');
+    this.gameService.gelAll().subscribe(
+      res => {
+         this.games = res;
         setTimeout(() => {
-          console.log('Async operation has ended');
+          //console.log('Async operation has ended');
           event.target.complete();
-      }, 0);
-    }
-  );
-}
+        }, 500);
+      }
+    );
+  }
 }

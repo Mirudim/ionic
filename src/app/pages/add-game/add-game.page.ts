@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/app/model/game'
-import { GameService } from '../../services/game.service';
+import { Game } from 'src/app/model/game';
+import { GameService } from 'src/app/services/game.service';
 import { AlertController } from '@ionic/angular';
-import { LoadingController } from '@ionic/angular';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-add-game',
@@ -14,46 +11,34 @@ import { Router } from '@angular/router';
 })
 export class AddGamePage implements OnInit {
 
-  protected game: Game = new Game; //modificador de visibilidade "protected" e "private"
-
+  protected game: Game = new Game;
 
   constructor(
-    protected gameService:GameService,
+    protected gameService: GameService,
     protected alertController: AlertController,
-    public loadingController: LoadingController,
     protected router:Router
   ) { }
 
   ngOnInit() {
   }
 
-  
-
-  onsubmit(form){
+  onsubmit(form) {
     this.gameService.save(this.game).then(
-      res=>{
+      res => {
         form.reset();
-        this.game=new Game;
-        //console.log("Cadastrado");
-        this.presentAlert("Aviso", "Cadastro")
+        this.game = new Game;
+        //+console.log("Cadastrado!");
+        this.presentAlert("Aviso", "Cadastrado!")
         this.router.navigate(['/tabs/listGame']);
-
       },
-      erro=>{
+      erro => {
         console.log("Erro: " + erro);
-        this.presentAlert("Erro", "Não foi possível fazer o cadastro")
-
-        
+        this.presentAlert("Erro", "Não foi possivel cadastrar!")
       }
     )
   }
-
-  
-
-
-
-  //Alertas ionic
-  async presentAlert(tipo:string, texto:string) {
+  //Alerts-------------------
+  async presentAlert(tipo: string, texto: string) {
     const alert = await this.alertController.create({
       header: tipo,
       //subHeader: 'Subtitle',
@@ -61,19 +46,5 @@ export class AddGamePage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
-    
-    
-  }
-  
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      spinner: null,
-      duration: 5000,
-      message: 'Please wait...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
   }
 }
-

@@ -8,32 +8,62 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'home',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+              import('../pages/home/home.module').then(m => m.HomePageModule)
           }
         ]
       },
       {
-        path: 'listJogador',
+        path: 'login',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/list-jogador/list-jogador.module').then(m => m.ListJogadorPageModule)
+              import('../pages/login-usuario/login-usuario.module').then(m => m.LoginUsuarioPageModule)
           }
         ]
       },
       {
-        path: 'perfilJogador/:id',
+        path: 'listPlayer',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/perfil-jogador/perfil-jogador.module').then(m => m.PerfilJogadorPageModule)
+              import('../pages/list-player/list-player.module').then(m => m.ListPlayerPageModule)
+          }
+        ]
+      },
+      {
+        path: 'perfilPlayer/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/perfil-player/perfil-player.module').then(m => m.PerfilPlayerPageModule)
+          }
+        ]
+      },
+      {
+        path: 'addPlayer',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
+
+            //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
+          }
+        ]
+      },
+      {
+        path: 'addPlayer/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
           }
         ]
       },
@@ -47,7 +77,6 @@ const routes: Routes = [
           }
         ]
       },
-
       {
         path: 'perfilGame/:id',
         children: [
@@ -58,51 +87,25 @@ const routes: Routes = [
           }
         ]
       },
-
       {
-        path: 'addjogador',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/add-jogador/add-jogador.module').then(m => m.AddJogadorPageModule)
-              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
-          }
-        ]
-      },
-      
-      {
-        path: 'addjogador/:id',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/add-jogador/add-jogador.module').then(m => m.AddJogadorPageModule)
-              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
-          }
-        ]
-      },
-
-
-      {
-        path: 'addgame',
+        path: 'addGame',
         children: [
           {
             path: '',
             loadChildren: () => import('../pages/add-game/add-game.module').then(m => m.AddGamePageModule)
-              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
           }
         ]
       },
-
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];
@@ -111,4 +114,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { AddJogadorPage } from './add-jogador.page';
 
-import { Camera} from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 
 const routes: Routes = [

@@ -19,7 +19,9 @@ export class JogadorService {
       email: jogador.email,
       pws: jogador.pws,
       foto: jogador.foto,
-      ativo:true
+      ativo: true,
+      lat:jogador.lat,
+      lng:jogador.lng
     });
   }
 

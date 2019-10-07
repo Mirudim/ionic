@@ -1,26 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>perfil-game</ion-title>
+    <ion-title>Perfil do Game</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+ 
+    <ion-item lines="none">
+      <img src="https://picsum.photos/100">
+    </ion-item>
 
-  <ion-item lines="none">
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-  </ion-item>
-
-
-  <ion-item>
-
-      <ion-text>      
-    <h2> Nome: {{game.nome}}</h2>
-    <p> categoria: {{game.categoria}}</p>
-    <p> console: {{game.console}}</p>
-    <p> Descricao: {{game.descricao}}</p>
-    <p> quantidade: {{game.quantidade}}</p>
-    <p> Valor: {{game.valor}}</p>
+    <ion-item>
+      <ion-text>
+        <h2>{{game.nome}}</h2>
+        <p>{{game.descricao}}</p>
+        <p>{{game.console}}</p>
+        <p>{{game.valor}}</p>
       </ion-text>
-
-  </ion-item>
+    </ion-item>
 </ion-content>

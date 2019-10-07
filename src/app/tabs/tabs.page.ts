@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  protected quantPlayer:number = 0;
+
+  constructor(
+    protected playerService: PlayerService,
+  ) {
+    this.playerService.gelAll().subscribe(
+      res=>{
+        this.quantPlayer = res.length
+      }
+    )
+
+  }
 
 }

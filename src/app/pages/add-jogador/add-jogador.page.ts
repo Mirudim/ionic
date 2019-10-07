@@ -6,6 +6,7 @@ import { LoadingController } from '@ionic/angular';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
     
 
@@ -21,7 +22,8 @@ export class AddJogadorPage implements OnInit {
 
   protected jogador: Jogador = new Jogador; //modificador de visibilidade "protected" e "private"
   protected id:any = null;
-  protected preview: any=null;
+  protected preview: any = null;
+
   constructor(
     protected jogadorService:JogadorService,
     protected alertController: AlertController,
@@ -29,8 +31,8 @@ export class AddJogadorPage implements OnInit {
     public loadingController: LoadingController,
     private navCtrl: NavController, private loadingCtrl: LoadingController,
     protected router:Router,
-    protected camera:Camera
-
+    private camera: Camera,
+    protected geolocation: Geolocation
   ) { }
 
   ngOnInit() {
@@ -45,14 +47,22 @@ export class AddJogadorPage implements OnInit {
     }
   }
   onsubmit(form){
-    if(this.preview){
-      this.presentAlert("Error", "Deve inserir uma foto");
-    }else
-    if(!this.id){
+    if (!this.preview){
+      this.presentAlert("Erro", "Deve inserir a foto do usuário");
+    } else{
+      this.jogador.foto = this.preview;
+
+      this.geolocation.getCurrentPosition().then((resp) => {
+        this.jogador.lat = resp.coords.latitude
+        this.jogador.lng = resp.coords.longitude
+       }).catch((error) => {
+         console.log('Error getting location', error);
+       });
+    if(!this.id) {
       this.jogadorService.save(this.jogador).then(
-        res=>{
+        res =>{
           form.reset();
-          this.jogador=new Jogador;
+          this.jogador= new Jogador;
           //console.log("Cadastrado");
           this.presentAlert("Aviso", "Cadastro")
           this.router.navigate(['/tabs/listJogador']);
@@ -61,6 +71,7 @@ export class AddJogadorPage implements OnInit {
         erro=>{
           console.log("Erro: " + erro);
           this.presentAlert("Erro", "Não foi possível fazer o cadastro")
+
         }
       )
     } else{
@@ -75,46 +86,33 @@ export class AddJogadorPage implements OnInit {
           console.log("Erro: " + erro);
           this.presentAlert("Erro", "Não foi possível atualizar!")
   
-          
+        
         }
       )
     }
-    this.jogadorService.save(this.jogador).then(
-      res=>{
-        form.reset();
-        this.jogador=new Jogador;
-        //console.log("Cadastrado");
-        this.presentAlert("Aviso", "Cadastro")
-        this.router.navigate(['/tabs/listJogador']);
+  }
+}
 
-      },
-      erro=>{
-        console.log("Erro: " + erro);
-        this.presentAlert("Erro", "Não foi possível fazer o cadastro")
+  tirarFoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.preview = base64Image;
 
-        
-      }
-    )
+    }, (err) => {
+     // Handle error
+    });
   }
 
-tirarFoto(){
-  const options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
-  }
   
-  this.camera.getPicture(options).then((imageData) => {
-   // imageData is either a base64 encoded string or a file URI
-   // If it's base64 (DATA_URL):
-   let base64Image = 'data:image/jpeg;base64,' + imageData;
-   this.preview= base64Image;
-  }, (err) => {
-   // Handle error
-  });
-}  
-
 
 
 

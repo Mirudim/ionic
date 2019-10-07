@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseConfig: {
+  firebaseConfig:{
     apiKey: "AIzaSyDJhajgYcIgNqQ0sxy9DhQsKkmbxVoOTOA",
     authDomain: "sharegames-3bbfe.firebaseapp.com",
     databaseURL: "https://sharegames-3bbfe.firebaseio.com",
