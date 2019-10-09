@@ -8,67 +8,47 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home',
+        path: 'tab1',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/home/home.module').then(m => m.HomePageModule)
+              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
           }
         ]
       },
       {
-        path: 'login',
+        path: 'listJogador',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/login-usuario/login-usuario.module').then(m => m.LoginUsuarioPageModule)
+              import('../pages/list-jogador/list-jogador.module').then(m => m.ListJogadorPageModule)
           }
         ]
       },
       {
-        path: 'listPlayer',
+        path: 'perfilJogador/:id',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/list-player/list-player.module').then(m => m.ListPlayerPageModule)
-          }
-        ]
-      },
-      {
-        path: 'perfilPlayer/:id',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../pages/perfil-player/perfil-player.module').then(m => m.PerfilPlayerPageModule)
-          }
-        ]
-      },
-      {
-        path: 'addPlayer',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
-
-            //loadChildren: '../pages/add-player/add-player.module#AddPlayerPageModule'
-          }
-        ]
-      },
-      {
-        path: 'addPlayer/:id',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/add-player/add-player.module').then(m => m.AddPlayerPageModule)
+              import('../pages/perfil-jogador/perfil-jogador.module').then(m => m.PerfilJogadorPageModule)
           }
         ]
       },
       {
         path: 'listGame',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../pages/list-game/list-game.module').then(m => m.ListGamePageModule)
+          }
+        ]
+      },
+      {
+        path: 'listGame/:id',
         children: [
           {
             path: '',
@@ -87,25 +67,72 @@ const routes: Routes = [
           }
         ]
       },
+
+      {
+        path: 'addJogador',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-Jogador/add-Jogador.module').then(m => m.AddJogadorPageModule)
+              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
+          }
+        ]
+      },
+      
+      {
+        path: 'addJogador/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-Jogador/add-Jogador.module').then(m => m.AddJogadorPageModule)
+              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
+          }
+        ]
+      },
+
+
       {
         path: 'addGame',
         children: [
           {
             path: '',
             loadChildren: () => import('../pages/add-game/add-game.module').then(m => m.AddGamePageModule)
+              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
           }
         ]
       },
       {
+        path: 'addGame/:id',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-game/add-game.module').then(m => m.AddGamePageModule)
+              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
+          }
+        ]
+      },
+
+      {
+        path: 'addLogin',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/add-Login/add-Login.module').then(m => m.AddLoginPageModule)
+              //loadChildren: '.../pages/add-jogador/add-jogador.module#AddJogadorPageModule'
+          }
+        ]
+      },
+
+      {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/tab1',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/tabs/tab1',
     pathMatch: 'full'
   }
 ];
@@ -114,4 +141,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule { }
+export class TabsPageRoutingModule {}

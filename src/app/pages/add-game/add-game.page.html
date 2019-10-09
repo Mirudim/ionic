@@ -1,44 +1,54 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastro do Game</ion-title>
+    <ion-title>cadastro de jogos</ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <form #fc="ngForm" (ngSubmit)="onsubmit(fc)">
-    <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="game.nome" name="nome" required></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Categoria</ion-label>
-      <ion-input type="text" [(ngModel)]="game.categoria" name="categoria" required></ion-input>
-    </ion-item>
+<form #fc="ngForm" (ngSubmit) = "onsubmit(fc)">
+      <ion-item>
+          <ion-label position="floating">Nome</ion-label>
+          <ion-input type="text" [(ngModel)] = "game.nome" name="nome" required ></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-label position="floating">Categoria</ion-label>
+          <ion-input type="text" [(ngModel)] = "game.categoria" name="categoria" required ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Console</ion-label>
-      <ion-input type="text" [(ngModel)]="game.console" name="console" required></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Console</ion-label>
+        <ion-input type="text" [(ngModel)]="game.console" name="console" required></ion-input>
+      </ion-item>
+      
+      <ion-item>
+          <ion-label position="floating">Descricao</ion-label>
+          <ion-input type="text" [(ngModel)] = "game.descricao" name="descricao" required ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Decrição</ion-label>
-      <ion-input type="text" [(ngModel)]="game.descricao" name="descricao" required></ion-input>
-    </ion-item>
+      <ion-item>
+          <ion-label position="floating">Quantidade</ion-label>
+          <ion-input type="number" [(ngModel)] = "game.quantidade" name="quantidade" required ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Quantidade</ion-label>
-      <ion-input type="number" [(ngModel)]="game.quant" name="quant" required></ion-input>
-    </ion-item>
+      <ion-item>
+          <ion-label position="floating">Valor</ion-label>
+          <ion-input type="number" [(ngModel)] = "game.valor" name="valor" required ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Valor</ion-label>
-      <ion-input type="number" [(ngModel)]="game.valor" name="valor" required></ion-input>
-    </ion-item>
-   
-    <ion-item lines="none">
-      <ion-button type="submit" color="primary" [disabled]="fc.invalid">Salvar</ion-button>
-      <ion-button type="reset" color="danger">Cancelar</ion-button>
-    </ion-item>
-  </form>
+      <ion-item lines="none">
+          <ion-button expand="full" type="submit" color="dark" [disabled]= "fc.invalid">Salvar</ion-button>
+          <!-- Verificar o "fc.invalid" se o F ta minusculo caso n esteja vai dar erro // e o "ngif" o I é maiusculo "ngIf"-->
+          <ion-button slot="end" type="reset" color="dark">cancelar</ion-button>
+      </ion-item>
+
+      <ion-item lines="none" *ngIf="id">
+        <ion-button type="submit" color="primary" [disabled]="fc.invalid">Editar</ion-button>
+        <ion-button type="reset" color="danger">Cancelar</ion-button>
+      </ion-item>
+</form>
+
+
 </ion-content>

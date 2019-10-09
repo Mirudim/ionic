@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PlayerService } from '../services/player.service';
+import { JogadorService } from '../services/jogador.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,14 +8,13 @@ import { PlayerService } from '../services/player.service';
 })
 export class TabsPage {
 
-  protected quantPlayer:number = 0;
-
+  protected quantJogador:number = 0;
   constructor(
-    protected playerService: PlayerService,
+    protected jogadorService: JogadorService,
   ) {
-    this.playerService.gelAll().subscribe(
+    this.jogadorService.getAll().subscribe(
       res=>{
-        this.quantPlayer = res.length
+        this.quantJogador = res.length
       }
     )
 

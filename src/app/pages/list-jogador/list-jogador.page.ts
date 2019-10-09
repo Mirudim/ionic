@@ -60,7 +60,7 @@ export class ListJogadorPage implements OnInit {
     await alert.present();
   }
 
-  async apagar(jogadorr) {
+  async apagar(jogador) {
     const alert = await this.alertController.create({
       header: 'Apagar dados!',
       message: 'Apagar todos os dados do Jogador',

@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.gameService.gelAll().subscribe(
+    this.gameService.getAll().subscribe(
       res => {
         this.games = res;
       }

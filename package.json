@@ -1,5 +1,5 @@
 {
-  "name": "shareGamesBS2018.2",
+  "name": "share-games-bs-2018-2",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -33,6 +33,7 @@
     "cordova-plugin-geolocation": "^4.0.2",
     "core-js": "^2.5.4",
     "firebase": "^6.6.2",
+    "firebase-tools": "^7.3.2",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
@@ -80,7 +81,9 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-camera": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-geolocation": {}
     },
     "platforms": [

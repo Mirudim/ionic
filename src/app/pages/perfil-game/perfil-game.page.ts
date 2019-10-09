@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/app/model/game';
-import { GameService } from 'src/app/services/game.service';
+import { Game } from '../../model/game';
+import { GameService } from '../../services/game.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,15 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 export class PerfilGamePage implements OnInit {
 
   protected game: Game = new Game;
-  private id: string = null;
+  private id:string = null;
+
 
   constructor(
     protected gameService: GameService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRouter:ActivatedRoute
+
+
   ) { }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.id = this.activatedRouter.snapshot.paramMap.get("id");
     if (this.id){
       this.gameService.get(this.id).subscribe(
         res=>{

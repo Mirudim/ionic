@@ -23,6 +23,9 @@ export class AddJogadorPage implements OnInit {
   protected jogador: Jogador = new Jogador; //modificador de visibilidade "protected" e "private"
   protected id:any = null;
   protected preview: any = null;
+  protected posLat: number = 0;
+  protected posLng: number = 0;
+
 
   constructor(
     protected jogadorService:JogadorService,
@@ -33,6 +36,7 @@ export class AddJogadorPage implements OnInit {
     protected router:Router,
     private camera: Camera,
     protected geolocation: Geolocation
+
   ) { }
 
   ngOnInit() {
@@ -45,19 +49,18 @@ export class AddJogadorPage implements OnInit {
         erro => this.id = null
       )
     }
+    
+    this.localAtual()
   }
+  
   onsubmit(form){
     if (!this.preview){
       this.presentAlert("Erro", "Deve inserir a foto do usuário");
     } else{
       this.jogador.foto = this.preview;
+      this.jogador.lat = this.posLat;
+      this.jogador.lng = this.posLng;
 
-      this.geolocation.getCurrentPosition().then((resp) => {
-        this.jogador.lat = resp.coords.latitude
-        this.jogador.lng = resp.coords.longitude
-       }).catch((error) => {
-         console.log('Error getting location', error);
-       });
     if(!this.id) {
       this.jogadorService.save(this.jogador).then(
         res =>{
@@ -112,9 +115,15 @@ export class AddJogadorPage implements OnInit {
     });
   }
 
-  
-
-
+  localAtual() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.jogador.lat = resp.coords.latitude
+      this.jogador.lng = resp.coords.longitude
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
+      }
+    
 
   //Alertas ionic
   async presentAlert(tipo:string, texto:string) {
