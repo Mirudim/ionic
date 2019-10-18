@@ -4,14 +4,14 @@
 
 export const environment = {
   production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyDJhajgYcIgNqQ0sxy9DhQsKkmbxVoOTOA",
-    authDomain: "sharegames-3bbfe.firebaseapp.com",
-    databaseURL: "https://sharegames-3bbfe.firebaseio.com",
-    projectId: "sharegames-3bbfe",
-    storageBucket: "sharegames-3bbfe.appspot.com",
-    messagingSenderId: "877368806135",
-    appId: "1:877368806135:web:d8cce95a98b60643f821f2"
+  firebaseConfig:{
+    apiKey: "AIzaSyAT2m-BIWf3gqJd-g6o1zVP5UaKi-94NjQ",
+    authDomain: "sharegames-acba6.firebaseapp.com",
+    databaseURL: "https://sharegames-acba6.firebaseio.com",
+    projectId: "sharegames-acba6",
+    storageBucket: "",
+    messagingSenderId: "36898137449",
+    appId: "1:36898137449:web:d849f9bf1b9149642309f8"
   }
 };
 

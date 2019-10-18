@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from 'src/app/model/player';
 import { PlayerService } from 'src/app/services/player.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  MarkerCluster
+} from '@ionic-native/google-maps';
 
 @Component({
   selector: 'app-add-player',
@@ -19,16 +27,27 @@ export class AddPlayerPage implements OnInit {
   protected posLat: number = 0;
   protected posLng: number = 0;
 
+  protected map: GoogleMap;
+
   constructor(
     protected playerService: PlayerService,
     protected alertController: AlertController,
     protected activedRoute: ActivatedRoute,
     protected router: Router,
     private camera: Camera,
-    private geolocation: Geolocation
-  ) { }
+    private geolocation: Geolocation,
+    private platform: Platform
+  ) {
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
+    //Localização atual
+    this.localAtual();
+    //Plataforma e GoogleMaps
+    await this.platform.ready();
+    await this.loadMap();
+
+    //Pega Id para autilaização dos dados do Player
     this.id = this.activedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       this.playerService.get(this.id).subscribe(
@@ -39,8 +58,6 @@ export class AddPlayerPage implements OnInit {
         //erro => this.id = null
       )
     }
-    //Localização atual
-    this.localAtual()
   }
 
   onsubmit(form) {
@@ -50,7 +67,6 @@ export class AddPlayerPage implements OnInit {
       this.player.foto = this.preview;
       this.player.lat = this.posLat;
       this.player.lng = this.posLng;
-
       if (!this.id) {
         this.playerService.save(this.player).then(
           res => {
@@ -58,7 +74,7 @@ export class AddPlayerPage implements OnInit {
             this.player = new Player;
             //console.log("Cadastrado!");
             this.presentAlert("Aviso", "Cadastrado!")
-            this.router.navigate(['/tabs/perfilPlayer', res.id]);
+            this.router.navigate(['/']);
           },
           erro => {
             console.log("Erro: " + erro);
@@ -121,4 +137,18 @@ export class AddPlayerPage implements OnInit {
     });
     await alert.present();
   }
+
+  loadMap() {
+    this.map = GoogleMaps.create('map_canvas', {
+      'camera': {
+        'target': {
+          "lat": this.posLat,
+          "lng": this.posLng
+        },
+        'zoom': 15
+      }
+    });
+    //this.addCluster(this.dummyData());
+  }
+
 }

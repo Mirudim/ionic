@@ -1,11 +1,13 @@
 export class Game {
-    id: string;
-    nome: string;
-    categoria: string;
-    console: string;
-    descricao: string;
-    quant: number;
-    valor: number;
-    foto: string[] = [];
+    id: string; 
+    nome: string; 
+    categoria: string; 
+    console: string; 
+    descricao: string; 
+    quant: number; 
+    valor: number; 
     ativo: boolean = true;
+    fotos:string[] = [];
+    lat:number;
+    lng:number;
 }

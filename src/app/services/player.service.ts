@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,21 +17,22 @@ export class PlayerService {
   ) { }
 
   save(player) {
-    this.afAuth.auth.createUserWithEmailAndPassword(player.email, player.pws)
-    .then(
-      res=>{
-        return this.fire.collection("players/"+ res.user.uid)
-        .add({
-          nome: player.nome,
-          nickname: player.nickname,
-          //email: player.email,
-          //pws: player.pws,
-          foto: player.foto,
-          ativo: player.ativo,
-          lat: player.lat,
-          lng: player.lng
-        }); 
-     });
+    return this.afAuth.auth.createUserWithEmailAndPassword(player.email, player.pws)
+      .then(
+        res => {
+          return this.fire.collection("players").doc(res.user.uid).set({
+              nome: player.nome,
+              nickname: player.nickname,
+             //email: player.email,
+             //pws: player.pws,
+              foto: player.foto,
+              ativo: player.ativo,
+              lat: player.lat,
+              lng: player.lng
+            });
+        }
+      )
+
   }
 
   gelAll() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Game } from '../model/game';
 import { map } from 'rxjs/operators';
+import { Game } from '../model/game';
 
 @Injectable({
   providedIn: 'root'
@@ -9,40 +9,44 @@ import { map } from 'rxjs/operators';
 export class GameService {
 
   constructor(
-    protected fire:AngularFirestore
+    protected fire: AngularFirestore
   ) { }
 
-  save(game){
+  save(game) {
     return this.fire.collection("games")
-    .add({
-      nome: game.nome,
-      categoria: game.categoria,
-      console: game.console,
-      descricao: game.descricao,
-      quantidade: game.quantidade,
-      valor: game.valor
-    });
+      .add({
+        nome: game.nome,
+        descricao: game.descricao,
+        categoria: game.categoria,
+        console: game.console,
+        quant: game.quant,
+        valor: game.valor,
+        ativo: game.ativo,
+        fotos: game.fotos,
+        lat: game.lat,
+        lng: game.lng
+      });
   }
 
-  getAll(){
+  gelAll() {
     return this.fire.collection("games").snapshotChanges()
-    .pipe(
-      map(dados => 
-        dados.map(d => ({ key: d.payload.doc.id, ...d.payload.doc .data() }))
+      .pipe(
+        map(dados =>
+          dados.map(d => ({ key: d.payload.doc.id, ...d.payload.doc.data() }))
+        )
       )
-    )
   }
 
-  get(id){
+  get(id) {
     return this.fire.collection("games").doc<Game>(id).valueChanges();
-}
-update(game, id){
-  return this.fire.collection("games").doc<Game>(id).update(game);
-
   }
 
-  remove(game){
+  update(game: Game, id: string) {
+    return this.fire.collection("games").doc<Game>(id)
+      .update(game);
+  }
+
+  remove(game: any) {
     return this.fire.collection("games").doc(game.key).delete();
   }
 }
-

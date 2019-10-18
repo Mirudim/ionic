@@ -1,20 +1,21 @@
 <ion-tabs>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="home"><ion-badge slot="start">1</ion-badge></ion-icon>
-      <ion-label>início</ion-label>
+    <ion-tab-button tab="home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="listJogador">
-      <ion-icon name="logo-game-controller-b"></ion-icon>
-      <ion-badge color="danger" *ngIf="quantJogador">{{quantJogador}}</ion-badge>
-      <ion-label>Jogadores</ion-label>
+    <ion-tab-button tab="listPlayer">
+      <ion-icon name="contacts"></ion-icon>
+      <ion-badge color="danger" *ngIf="quantPlayer">{{quantPlayer}}</ion-badge>
+      <ion-label>Players</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="listGame">
-      <ion-icon name="logo-game-controller-a"></ion-icon>
-      <ion-label>Adicionar jogo</ion-label>
+      <ion-icon name="logo-game-controller-b"></ion-icon>
+      <ion-badge color="danger"*ngIf="quantGame">{{quantGame}}</ion-badge>
+      <ion-label>Games</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

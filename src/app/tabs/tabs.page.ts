@@ -1,5 +1,6 @@
+import { GameService } from 'src/app/services/game.service';
 import { Component } from '@angular/core';
-import { JogadorService } from '../services/jogador.service';
+import { PlayerService } from '../services/player.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,13 +9,21 @@ import { JogadorService } from '../services/jogador.service';
 })
 export class TabsPage {
 
-  protected quantJogador:number = 0;
+  protected quantPlayer:number = 0;
+  protected quantGame:number = 0;
+
   constructor(
-    protected jogadorService: JogadorService,
+    protected playerService: PlayerService,
+    protected gameService: GameService,
   ) {
-    this.jogadorService.getAll().subscribe(
+    this.playerService.gelAll().subscribe(
       res=>{
-        this.quantJogador = res.length
+        this.quantPlayer = res.length
+      }
+    )
+    this.gameService.gelAll().subscribe(
+      res=>{
+        this.quantGame = res.length
       }
     )
 

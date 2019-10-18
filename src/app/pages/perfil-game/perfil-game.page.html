@@ -1,37 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>perfil-game</ion-title>
+    <ion-title>Perfil do Game</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-item lines="none">
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-  </ion-item>
-
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let foto of game.fotos">
+      <img src="{{foto}}">
+    </ion-slide>
+  </ion-slides>
 
   <ion-item>
-
-      <ion-text>      
-    <h2> Nome: {{game.nome}}</h2>
-    <p> categoria: {{game.categoria}}</p>
-    <p> console: {{game.console}}</p>
-    <p> Descricao: {{game.descricao}}</p>
-    <p> quantidade: {{game.quantidade}}</p>
-    <p> Valor: {{game.valor}}</p>
-      </ion-text>
-
-      <ion-slides>
-          <ion-slide>
-              <img src="https://images-americanas.b2w.io/produtos/01/00/offers/01/00/item/133799/8/133799830_1GG.png">
-          </ion-slide>
-                  <ion-slide >
-            <img src="https://static-wp-tor15-prd.torcedores.com/wp-content/uploads/2018/08/bola.png-590x389.jpg">
-            </ion-slide>
-                           <ion-slide >
-              <img src="https://www.mundopositivo.com.br/wp-content/uploads/2019/01/conheca-a-nova-bola-da-champions-league-1.jpg">
-            </ion-slide>
-            </ion-slides>
-        </ion-item>
+    <ion-text>
+      <h2>{{game.nome}}</h2>
+      <p>Desrição: {{game.descricao}}</p>
+      <p>Console: {{game.console}}</p>
+      <p>Categoria: {{game.categoria}}</p>
+      <p>Valor: {{game.valor | currency : "BRL"}}</p>
+    </ion-text>
+  </ion-item>
 </ion-content>
